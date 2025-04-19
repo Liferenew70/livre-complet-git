@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails du Livre</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="/img_head/favicon/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #eaeaea;
+    }
+    .details {
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 450px;
+      margin: 30px auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    h2, h3 {
+      color: #333;
+      text-align: center;
+    }
+    p {
+      margin: 8px 0;
+    }
+    .btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .form-group {
+      margin-top: 15px;
+      text-align: left;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .input-icon {
+      display: flex;
+      align-items: center;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    .input-icon i {
+      color: #888;
+      margin-right: 10px;
+    }
+    .input-icon input {
+      border: none;
+      background: transparent;
+      outline: none;
+      flex: 1;
+      font-size: 16px;
+    }
+    @media (max-width: 500px) {
+      .details {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="details">
+    <h2>Détails du Livre</h2>
+    <p><strong>Version :</strong> <span id="version"></span></p>
+    <p><strong>Auteur :</strong> <span id="auteur"></span></p>
+    <p><strong>Titre :</strong> <span id="titre"></span></p>
+    <p><strong>Année :</strong> <span id="annee"></span></p>
+    <p><strong>Catégorie :</strong> <span id="categorie"></span></p>
+    <p><strong>Solde :</strong> <span id="prix"></span></p><br>
+    <hr width="80%">
+
+    <div id="form" style="margin-top: 25px;">
+      <h3>Formulaire de Commande</h3>
+
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <div class="input-icon">
+          <i class="fas fa-user"></i>
+          <input type="text" id="name" placeholder="Votre nom" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="surname">Prénom</label>
+        <div class="input-icon">
+          <i class="fas fa-user-tag"></i>
+          <input type="text" id="surname" placeholder="Votre prénom" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Gmail</label>
+        <div class="input-icon">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="email" placeholder="Votre adresse Gmail" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="book">Livre commandé</label>
+        <div class="input-icon">
+          <i class="fas fa-book"></i>
+          <input type="text" id="book" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Prix</label>
+        <div class="input-icon">
+          <i class="fas fa-money-bill-wave"></i>
+          <input type="text" id="price" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Date de commande</label>
+        <div class="input-icon">
+          <i class="fas fa-calendar-alt"></i>
+          <input type="text" id="date" readonly>
+        </div>
+      </div>
+
+      <button class="btn" id="payBtn" disabled>👆 Veuillez remplir le formulaire ci-dessus</button>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const auteur = params.get("auteur");
+    const titre = params.get("titre");
+    const annee = params.get("annee");
+    const categorie = params.get("categorie");
+    const prix = params.get("prix");
+
+    document.getElementById("auteur").innerText = auteur;
+    document.getElementById("titre").innerText = titre;
+    document.getElementById("annee").innerText = annee;
+    document.getElementById("categorie").innerText = categorie;
+    document.getElementById("prix").innerText = prix;
+
+    document.getElementById("book").value = titre;
+    document.getElementById("price").value = prix;
+
+    // Déterminer la version (dynamique)
+    const versionText = titre.toLowerCase().includes("alternative") ? "Version alternative" : "Version originale";
+    document.getElementById("version").innerText = versionText;
+
+    // Remplir la date actuelle
+    const dateInput = document.getElementById('date');
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('fr-FR', {
+      day: '2-digit', month: '2-digit', year: 'numeric'
+    });
+    dateInput.value = formattedDate;
+
+    const nameInput = document.getElementById('name');
+    const surnameInput = document.getElementById('surname');
+    const emailInput = document.getElementById('email');
+    const payBtn = document.getElementById('payBtn');
+
+    function checkFormFields() {
+      const name = nameInput.value.trim();
+      const surname = surnameInput.value.trim();
+      const email = emailInput.value.trim();
+      const price = document.getElementById('price').value;
+
+      if (name && surname && email) {
+        payBtn.disabled = false;
+        payBtn.innerText = `✅ PAYER MAINTENANT À ${price}`;
+        payBtn.onclick = sendWhatsApp;
+      } else {
+        payBtn.disabled = true;
+        payBtn.innerText = "👆 Veuillez remplir le formulaire ci-dessus";
+        payBtn.onclick = null;
+      }
+    }
+
+    nameInput.addEventListener('input', checkFormFields);
+    surnameInput.addEventListener('input', checkFormFields);
+    emailInput.addEventListener('input', checkFormFields);
+
+    function sendWhatsApp() {
+      const name = nameInput.value.trim();
+      const surname = surnameInput.value.trim();
+      const email = emailInput.value.trim();
+      const book = document.getElementById('book').value;
+      const price = document.getElementById('price').value;
+      const date = document.getElementById('date').value;
+
+      const message = `Nom: ${name}\nPrénom: ${surname}\nEmail: ${email}\nLivre commandé: ${book}\nPrix: ${price}\nDate de commande: ${date}`;
+      const confirmMsg = `Voulez-vous vraiment envoyer cette commande ?\n\n${message}`;
+
+      if (confirm(confirmMsg)) {
+        const whatsappUrl = `https://wa.me/+2250595762779?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+      }
+    }
+  </script>
+</body>
+</html>

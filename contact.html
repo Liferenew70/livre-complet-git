@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | JADsmith PDF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="/img_head/favicon/favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f4f8;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      margin-top: 15px;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: white;
+      width: 0;
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .btn {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #0056b3, #009be2);
+    }
+    footer {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+    footer p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>JADsmith PDF</h1>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="#">PDF</a>
+    <a href="#">Catégories</a>
+    <a href="#">À Propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Contactez-nous</h2>
+  <form id="contactForm">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" required>
+
+    <label for="note">Note du site :</label>
+    <select id="note" name="note" required>
+      <option value="">-- Sélectionner --</option>
+      <option value="Excellent">Excellent</option>
+      <option value="Très bon">Très bon</option>
+      <option value="Bon">Bon</option>
+      <option value="Moyen">Moyen</option>
+      <option value="À améliorer">À améliorer</option>
+    </select>
+
+    <label for="message">Mot à dire :</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+
+    <button type="button" class="btn" onclick="envoyerMessage()">📤 Envoyer sur WhatsApp</button>
+  </form>
+</main>
+
+<footer>
+  <p>&copy; 2025 JADsmith. Tous droits réservés.</p>
+</footer>
+
+<script>
+  function envoyerMessage() {
+    const nom = document.getElementById("nom").value.trim();
+    const prenom = document.getElementById("prenom").value.trim();
+    const note = document.getElementById("note").value;
+    const message = document.getElementById("message").value.trim();
+
+    if (!nom || !prenom || !note || !message) {
+      alert("Veuillez remplir tous les champs !");
+      return;
+    }
+
+    const texte = `Bonjour JADsmith ! 👋\n\n🧑 Nom : ${nom}\n👤 Prénom : ${prenom}\n⭐ Note du site : ${note}\n📝 Mot à dire : ${message}`;
+    const lienWhatsApp = `https://wa.me/2250595762779?text=${encodeURIComponent(texte)}`;
+    window.open(lienWhatsApp, "_blank");
+  }
+</script>
+
+</body>
+</html>

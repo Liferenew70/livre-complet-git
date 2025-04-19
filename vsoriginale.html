@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Versions Originales | JADsmith PDF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="shortcut icon" href="/img_head/favicon/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f2f4f8;
+      color: #333;
+    }
+
+    header, footer {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    .book-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .book-card {
+      background-color: #fff;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .book-card h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .book-card p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>JADsmith PDF</h1>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="vsoriginale.html">Version Originale</a>
+    <a href="vsalternatif.html">Version Alternative</a>
+    <a href="categorie.html">Catégories</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h2>📚 Livres en Version Originale</h2>
+  <div class="book-list" id="bookList">
+    <!-- Les livres seront injectés ici via JavaScript -->
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 JADsmith. Tous droits réservés.</p>
+</footer>
+
+<script>
+  const livres = [
+    { titre: "L'étranger", auteur: "Albert Camus", version: "originale" },
+    { titre: "Le Petit Prince", auteur: "Antoine de Saint-Exupéry", version: "originale" },
+    { titre: "1984", auteur: "George Orwell", version: "alternative" },
+    { titre: "Don Quichotte", auteur: "Cervantes", version: "originale" }
+  ];
+
+  const container = document.getElementById("bookList");
+  const livresOriginale = livres.filter(livre => livre.version === "originale");
+
+  livresOriginale.forEach(livre => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.innerHTML = `
+      <h4>${livre.titre}</h4>
+      <p><strong>Auteur :</strong> ${livre.auteur}</p>
+    `;
+    container.appendChild(card);
+  });
+</script>
+
+</body>
+</html>

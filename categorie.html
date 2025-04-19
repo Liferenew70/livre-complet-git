@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catégories | JADsmith PDF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="shortcut icon" href="/img_head/favicon/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    main {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .accordion {
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+      padding: 15px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+      transition: background 0.3s;
+    }
+    .accordion:hover {
+      background-color: #e8f1ff;
+    }
+    .panel {
+      padding: 0 15px;
+      background-color: white;
+      display: none;
+      overflow: hidden;
+      border-left: 4px solid #007bff;
+      margin-bottom: 10px;
+      border-radius: 0 0 8px 8px;
+    }
+    .panel p {
+      margin: 10px 0;
+    }
+    footer {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>JADsmith PDF</h1>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="vsoriginale.html">Version Originale</a>
+    <a href="vsalternatif.html">Version Alternative</a>
+    <a href="categorie.html">Catégories</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Catégories de Livres</h2>
+
+  <button class="accordion">📚 Romans</button>
+  <div class="panel">
+    <p>• Le Comte de Monte-Cristo</p>
+    <p>• Les Misérables</p>
+    <p>• L'Étranger</p>
+  </div>
+
+  <button class="accordion">🧠 Développement personnel</button>
+  <div class="panel">
+    <p>• Réfléchissez et devenez riche</p>
+    <p>• Les 7 habitudes des gens efficaces</p>
+    <p>• Le Pouvoir du moment présent</p>
+  </div>
+
+  <button class="accordion">🌍 Philosophie</button>
+  <div class="panel">
+    <p>• Le Banquet - Platon</p>
+    <p>• Ainsi parlait Zarathoustra</p>
+    <p>• Critique de la raison pure</p>
+  </div>
+
+  <button class="accordion">💼 Business & Économie</button>
+  <div class="panel">
+    <p>• Père riche, père pauvre</p>
+    <p>• La semaine de 4 heures</p>
+    <p>• L'art de la guerre</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 JADsmith. Tous droits réservés.</p>
+</footer>
+
+<script>
+  const acc = document.querySelectorAll(".accordion");
+  acc.forEach(btn => {
+    btn.addEventListener("click", function() {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

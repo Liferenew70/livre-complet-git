@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JADsmith PDF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="/img_head/favicon/favicon.ico" type="image/x-icon">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f4f8;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    header h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; }
+    nav {
+      margin-top: 15px;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: white;
+      width: 0;
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+    }
+    nav a:hover::after { width: 100%; }
+    .search-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 25px auto 15px;
+      max-width: 600px;
+      padding: 0 10px;
+    }
+    .search-bar {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 25px;
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+    }
+    .search-btn {
+      padding: 12px 20px;
+      border: none;
+      background-color: #0056b3;
+      color: white;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .search-btn:hover { background-color: #003f87; }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px 20px;
+      gap: 20px;
+    }
+    .item {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      max-width: 260px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    .item img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: solid 2px #007bff;
+    }
+    .item p { margin: 8px 0; font-size: 15px; }
+    .btn {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      border: none;
+      padding: 10px 0;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #0056b3, #009be2);
+    }
+    footer {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    footer p { margin: 5px 0; font-size: 14px; }
+    .title-logo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      width: 70px;
+      height: 78px;
+      box-shadow: 0px 1px 5px rgba(3, 3, 17, 0.08),
+        0px 5px 22px rgba(3, 3, 17, 0.16),
+        0px 12px 49px rgba(3, 3, 17, 0.25),
+        0px 20px 87px rgba(3, 3, 17, 0.33),
+        0px 32px 136px rgba(3, 3, 17, 0.41);
+    }
+
+    /* Animation fade in */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <section class="title-logo">
+    <img src="./img_head/logo2.jpeg" alt="Logo" class="logo" />
+    <h1>JADsmith PDF</h1>
+  </section>
+  <nav>
+    <a href="vsoriginale.html">PDF Originaux</a>
+    <a href="vsalternatif.html">PDF Alternatifs</a>
+    <a href="categorie.html">Catégories</a>
+    <a href="apropos.html">À Propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="search-wrapper">
+    <input type="text" class="search-bar" placeholder="Recherche... (Auteur, Titre, Année, Catégorie)" />
+    <button class="search-btn" onclick="filterBooks()">Rechercher</button>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Liste des livres (tes items existants) -->
+  <div class="item">
+    <img src="joker.jpg" alt="Livre" />
+    <p><strong>Auteur:</strong> Joker Smiler</p>
+    <p><strong>Titre:</strong> Le fou rire du joker</p>
+    <p><strong>Année:</strong> 2006</p>
+    <p><strong>Catégorie:</strong> Psychologie</p>
+    <p><strong>version:</strong> originale</p>
+    <p><strong>prix:</strong> 300 FR CFA</p>
+    <button class="btn" onclick="redirectToDetails('joker smiler', 'le fou rire du joker', '2006', 'Psychologie', '300 FR CFA')">📘 PASSER COMMANDE</button>
+    <button class="btn" onclick="redirectToVersion('joker smiler', 'le fou rire du joker', '2006', 'Psychologie', '300', '100')">📄 Version du livre</button>
+  </div>
+
+  <div class="item">
+    <img src="ab_color50x640.png" alt="Livre" />
+    <p><strong>Auteur:</strong> Jean-Claude Gérodez</p>
+    <p><strong>Titre:</strong> 50 excercies pour aborder les couleurs</p>
+    <p><strong>Année:</strong> 2013</p>
+    <p><strong>Catégorie:</strong> Art</p>
+    <p><strong>version:</strong> originale</p>
+    <p><strong>prix:</strong> 300 FR CFA</p>
+    <button class="btn" onclick="redirectToDetails('Jean-Claude Gérodez', '50 excercies pour aborder les couleurs', '2013', 'Art', '300 FR CFA')">📘 PASSER COMMANDE</button>
+    <button class="btn" onclick="redirectToVersion('Jean-Claude Gérodez', '50 excercies pour aborder les couleurs', '2013', 'Art', '300', '150')">📄 Version du livre</button>
+  </div>
+
+  <div class="item">
+    <img src="3_astuces.jpg" alt="Livre" />
+    <p><strong>Auteur:</strong> Ludovic GAUTIER</p>
+    <p><strong>Titre:</strong> 3 astuces pour travailler plus éfficacement</p>
+    <p><strong>Année:</strong> 2008</p>
+    <p><strong>Catégorie:</strong> Art</p>
+    <p><strong>version:</strong> originale</p>
+    <p><strong>prix:</strong> 400 FR CFA</p>
+    <button class="btn" onclick="redirectToDetails('Ludovic GAUTIER', '3 astuces pour travailler plus éfficacement', '2008', 'Art', '400 FR CFA')">📘 PASSER COMMANDE</button>
+    <button class="btn" onclick="redirectToVersion('Ludovic GAUTIER', '3 astuces pour travailler plus éfficacement', '2008', 'Art', '400', '250')">📄 Version du livre</button>
+  </div>
+
+  <div class="item">
+    <img src="200_mots.jpeg" alt="Livre" />
+    <p><strong>Auteur:</strong> Hélène DROUARD</p>
+    <p><strong>Titre:</strong> 200 mots pour paraître intelligent et cultivé</p>
+    <p><strong>Année:</strong> 2020</p>
+    <p><strong>Catégorie:</strong> FRANCAISE</p>
+    <p><strong>version:</strong> originale</p>
+    <p><strong>prix:</strong> 300 FR CFA</p>
+    <button class="btn" onclick="redirectToDetails('Hélène DROUARD', '200 mots pour paraître intelligent et cultivé', '2020', 'FRANCAISE', '300 FR CFA')">📘 PASSER COMMANDE</button>
+    <button class="btn" onclick="redirectToVersion('Hélène DROUARD', '200 mots pour paraître intelligent et cultivé', '2020', 'FRANCAISE', '300', '175')">📄 Version du livre</button>
+  </div>
+
+  <div class="item">
+    <img src="VOIr_lamere.jpg" alt="Livre" />
+    <p><strong>Auteur:</strong> Bernard Clavel</p>
+    <p><strong>Titre:</strong> Celui qui voulait voir la mer</p>
+    <p><strong>Année:</strong> ####</p>
+    <p><strong>Catégorie:</strong> hérétique</p>
+    <p><strong>version:</strong> originale</p>
+    <p><strong>prix:</strong> 350 FR CFA</p>
+    <button class="btn" onclick="redirectToDetails('Bernard Clavel', 'Celui qui voulait voir la mer', '####', 'hérétique', '350 FR CFA')">📘 PASSER COMMANDE</button>
+    <button class="btn" onclick="redirectToVersion('Bernard Clavel', 'Celui qui voulait voir la mer', '####', 'hérétique', '350', '200')">📄 Version du livre</button>
+  </div>
+</div>
+
+<!-- PAGINATION avec animation -->
+<div style="text-align: center; margin: 30px 0;">
+  <button id="prevBtn" class="btn" style="width: 120px; margin-right: 10px;">⬅️ Précédent</button>
+  <span id="pageIndicator" style="font-weight: bold; font-size: 18px;">1 / 1</span>
+  <button id="nextBtn" class="btn" style="width: 120px; margin-left: 10px;">Suivant ➡️</button>
+</div>
+
+<section>
+  <address><form></form></address>
+</section>
+
+<footer>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+    <p>&copy; 2025 JADsmith. Tous droits réservés.</p>
+    <div style="display: flex; gap: 15px; font-size: 20px;">
+      <a href="https://wa.me/+2250595762779" target="_blank" style="color: white;"><i class="fab fa-whatsapp"></i></a>
+      <a href="contact.html" target="_blank" style="color: white;"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://t.me/joker_smiler" target="_blank" style="color: white;"><i class="fab fa-telegram"></i></a>
+      <a href="mailto:liferenew70@gmail.com" style="color: white;"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p style="font-size: 14px;">
+      <a href="#" style="color: white; text-decoration: underline;">Politique de confidentialité</a> |
+      <a href="#" style="color: white; text-decoration: underline;">Conditions d'utilisation</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  function redirectToDetails(auteur, titre, annee, categorie, prix) {
+    const params = new URLSearchParams({ auteur, titre, annee, categorie, prix });
+    window.location.href = `details.html?${params.toString()}`;
+  }
+
+  function redirectToVersion(auteur, titre, annee, categorie, prixOriginal, prixAlternatif) {
+    const params = new URLSearchParams({ auteur, titre, annee, categorie, prixOriginal, prixAlternatif });
+    window.location.href = `env.html?${params.toString()}`;
+  }
+
+  const searchInput = document.querySelector('.search-bar');
+  const items = document.querySelectorAll('.item');
+
+  function filterBooks() {
+    const searchTerm = searchInput.value.toLowerCase();
+    items.forEach(item => {
+      const text = item.innerText.toLowerCase();
+      item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+    });
+  }
+
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      filterBooks();
+    }
+  });
+
+  // Pagination avec animation fade
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(items.length / itemsPerPage);
+  let currentPage = 1;
+
+  function showPage(page) {
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    items.forEach((item, index) => {
+      if (index >= start && index < end) {
+        item.style.display = 'block';
+        item.classList.add('fadeIn');
+      } else {
+        item.style.display = 'none';
+        item.classList.remove('fadeIn');
+      }
+    });
+
+    document.getElementById('pageIndicator').textContent = `${page} / ${totalPages}`;
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      showPage(currentPage);
+    }
+  });
+
+  showPage(currentPage); // Initialisation
+</script>
+
+</body>
+</html>

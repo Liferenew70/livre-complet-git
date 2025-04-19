@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À Propos - JADsmith PDF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="/img_head/favicon/favicon.ico" type="image/x-icon">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 1px;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f4f8;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      margin-top: 15px;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: white;
+      width: 0;
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .container {
+      padding: 30px 20px;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+    .about {
+      margin: 20px 0;
+    }
+    .about h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+    footer {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    footer p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    /* Media Queries */
+    @media (max-width: 1200px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .about h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      header {
+        padding: 15px 20px;
+      }
+      nav a {
+        margin: 0 8px;
+      }
+      .container {
+        padding: 20px 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+      .about h2 {
+        font-size: 1.3rem;
+      }
+      footer p {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+      .about {
+        margin: 15px 0;
+      }
+      .about h2 {
+        font-size: 1.2rem;
+      }
+      footer {
+        padding: 15px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <section class="title-logo">
+    <img src="./img_head/logo2.jpeg" alt="Logo" class="logo" />
+    <h1>JADsmith PDF</h1>
+  </section>
+  <nav>
+    <a href="vsoriginale.html">PDF Originaux</a>
+    <a href="vsalternatif.html">PDF Alternatifs</a>
+    <a href="categorie.html">Catégories</a>
+    <a href="apropos.html">À Propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<br>
+<div class="container">
+  <div class="about">
+    <h2>Qui sommes-nous ?</h2>
+    <p>JADsmith PDF est une plateforme dédiée à la vente de livres numériques dans divers domaines. Notre mission est de faciliter l'accès à une large gamme de ressources littéraires, en offrant des PDF originaux et alternatifs aux lecteurs.</p>
+  </div>
+  <div class="about">
+    <h2>Notre vision</h2>
+    <p>Nous croyons que la connaissance doit être accessible à tous. C'est pourquoi nous nous engageons à fournir des livres de qualité à des prix abordables, afin d'encourager l'apprentissage et la culture.</p>
+  </div>
+  <div class="about">
+    <h2>Contactez-nous</h2>
+    <p>Pour toute question ou demande, n'hésitez pas à nous contacter via notre page <a href="contact.html" style="color: #007bff;">Contact</a>.</p>
+  </div>
+</div>
+<br>
+<footer>
+  <p>&copy; 2025 JADsmith. Tous droits réservés.</p>
+  <div class="social-icons">
+    <a href="https://wa.me/+2250595762779?text=Bonjour%0A*Monsieur%20DEV.%20WEB*%0A%0AJ'ai%20eu%20votre%20contact%20sur%20le%20site%20:%20*JADsmith%20PDF*%0A" target="_blank" style="color: white;" title="WhatsApp directe"><i class="fab fa-whatsapp"></i></a>
+    <a href="contact.html" style="color: white;" title="Contact"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://t.me/joker_smiler" target="_blank" style="color: white;" title="Telegram"><i class="fab fa-telegram"></i></a>
+    <a href="mailto:liferenew70@gmail.com" style="color: white;" title="Email"><i class="fas fa-envelope"></i></a>
+  </div>
+  <p style="font-size: 14px;">
+    <a href="#" style="color: white; text-decoration: underline;">Politique de confidentialité</a> |
+    <a href="#" style="color: white; text-decoration: underline;">Conditions d'utilisation</a>
+  </p>
+</footer>
+
+</body>
+</html>
