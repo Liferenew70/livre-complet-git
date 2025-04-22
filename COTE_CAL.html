@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon-feu.ico" type="image/x-icon"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+    <!-- Open Graph Meta Tags -->
+<meta property="og:title" content="🔥 Analyse Hockey PRO – Prédictions & Paris Sportifs Gagnants" />
+<meta property="og:description" content="Optimise tes mises et maximise tes gains avec notre outil intelligent d’analyse de matchs de hockey. Statistiques, cotes, pronostics & conseils en un clic !" />
+<meta property="og:image" content="https://ibb.co/W4VWNQGR" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://liferenew70.github.io/PRO-PREDICTION-HOCKEY/" />
+
+<!-- Twitter Card (optionnel mais conseillé) -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="🔥 Analyse Hockey PRO – Prédictions & Paris Sportifs Gagnants" />
+<meta name="twitter:description" content="Optimise tes mises et maximise tes gains avec notre outil intelligent d’analyse de matchs de hockey. Statistiques, cotes, pronostics & conseils en un clic !" />
+<meta name="twitter:image" content="https://ibb.co/W4VWNQGR" />
+  <title>calcul gain - intélligent</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #2e2e3e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #00ffcc;
+      color: #1e1e2f;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #00cc99;
+    }
+
+    #tableauParis {
+      margin-top: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #2e2e3e;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      form, #tableauParis {
+        width: 100%;
+        padding: 15px;
+      }
+
+      input[type="number"], button {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Analyseur de Paris Sportifs</h1>
+  <form onsubmit="event.preventDefault(); calculerParis();">
+    <label for="mise">Mise totale (en Franc CFA) :</label>
+    <input type="number" id="mise" step="0.01" min="0" required>
+
+    <label for="cote1">Cote 1 :</label>
+    <input type="number" id="cote1" step="0.01" min="1" required>
+
+    <label for="cote2">Cote 2 :</label>
+    <input type="number" id="cote2" step="0.01" min="1" required>
+
+    <button type="submit">Calculer</button>
+  </form>
+<a href="JAD_hockey.html">
+    <button style="margin-top: 20px; background-color: #ffcc00; color: #1e1e2f;">Retour à l'analyseur de match hockey</button>
+</a>
+  <div id="tableauParis"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    let chartInstance = null;
+
+    function afficherCamembert(m1, m2) {
+      const canvas = document.getElementById('camembertMises');
+      const ctx = canvas.getContext('2d');
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Mise sur Cote 1', 'Mise sur Cote 2'],
+          datasets: [{
+            data: [m1, m2],
+            backgroundColor: ['#36A2EB', '#FF6384']
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: 'white'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function calculerParis() {
+      const mise = parseFloat(document.getElementById("mise").value);
+      const cote1 = parseFloat(document.getElementById("cote1").value);
+      const cote2 = parseFloat(document.getElementById("cote2").value);
+
+      if (isNaN(mise) || isNaN(cote1) || isNaN(cote2) || mise <= 0 || cote1 <= 1 || cote2 <= 1) {
+        alert("Veuillez entrer des valeurs valides.");
+        return;
+      }
+
+      const mise1 = mise / (1 + (cote1 / cote2));
+      const mise2 = mise - mise1;
+
+      const gain1 = mise1 * cote1;
+      const gain2 = mise2 * cote2;
+
+      const profit1 = gain1 - mise;
+      const profit2 = gain2 - mise;
+
+      const tableau = `
+        <table border="1" style="width:100%; border-collapse: collapse; text-align:center; color:white;">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Pari sur cote 1 (${cote1})</th>
+              <th>Pari sur cote 2 (${cote2})</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Somme misée</td>
+              <td>${mise1.toFixed(2)} F CFA</td>
+              <td>${mise2.toFixed(2)} F CFA</td>
+            </tr>
+            <tr>
+              <td>Gain potentiel</td>
+              <td>${gain1.toFixed(2)} F CFA</td>
+              <td>${gain2.toFixed(2)} F CFA</td>
+            </tr>
+            <tr>
+              <td>Profit net</td>
+              <td style="color: ${profit1 >= 0 ? 'lightgreen' : 'red'};">${profit1.toFixed(2)} F CFA</td>
+              <td style="color: ${profit2 >= 0 ? 'lightgreen' : 'red'};">${profit2.toFixed(2)} F CFA</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px;">✔️ En cas de victoire de l'un ou l'autre, vous ${Math.min(profit1, profit2) >= 0 ? 'gagnez' : 'limitez vos pertes'}.</p>
+        <canvas id="camembertMises" width="400" height="400" style="margin-top:20px;"></canvas>
+      `;
+
+      document.getElementById("tableauParis").innerHTML = tableau;
+      afficherCamembert(mise1, mise2);
+    }
+  </script>
+</body>
+</html>
