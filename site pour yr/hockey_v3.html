@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyse Paris Sportifs Hockey PRO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff416c, #007bff);
+      margin: 0;
+      padding: 20px;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      animation: slideUp 1s ease-out;
+    }
+    input, select, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      background: #ff416c;
+      color: white;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+    button:hover {
+      background: #e63956;
+      transform: scale(1.03);
+    }
+    .results {
+      display: none;
+      margin-top: 20px;
+      animation: fadeIn 1s ease-in;
+    }
+    .result-box {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .safe {
+      background-color: #28a745;
+    }
+    .risky {
+      background-color: #dc3545;
+    }
+    .result-box ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    .result-box li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    footer {
+      background: rgba(0, 0, 0, 0.4);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      animation: fadeIn 2s;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<!-- SEULEMENT LA PARTIE <body> mise à jour -->
+<body>
+
+<h1>🏒 Analyse Hockey - Paris Sportifs PRO</h1>
+
+<div class="container">
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <div style="flex: 1;">
+      <input type="number" id="cote1" placeholder="Cote équipe 1" step="0.01">
+    </div>
+    <div style="flex: 1;">
+      <input type="number" id="cote2" placeholder="Cote équipe 2" step="0.01">
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+    <div style="flex: 1; min-width: 240px;">
+      <h3>Équipe 1</h3>
+      <select id="plus55_1">
+        <option value="">Plus de 5,5 buts ?</option>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      <select id="plus15_1">
+        <option value="">Plus de 1,5 buts en 1ère période ?</option>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      <input type="number" id="class1" placeholder="Classement équipe 1">
+    </div>
+
+    <div style="flex: 1; min-width: 240px;">
+      <h3>Équipe 2</h3>
+      <select id="plus55_2">
+        <option value="">Plus de 5,5 buts ?</option>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      <select id="plus15_2">
+        <option value="">Plus de 1,5 buts en 1ère période ?</option>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      <input type="number" id="class2" placeholder="Classement équipe 2">
+    </div>
+  </div>
+
+  <button onclick="analyserMatch()">Analyser</button>
+  <button onclick="resetForm()">Réinitialiser</button>
+
+  <div id="results" class="results">
+    <h2>Résultats :</h2>
+    <div id="risque" class="result-box risky"></div>
+    <div id="securise" class="result-box safe"></div>
+  </div>
+</div>
+<br>
+<footer>
+  &copy; 2025 Analyse Hockey PRO | Fait avec passion pour les parieurs exigeants. <br>
+  Contact : contact@hockeypro.fr
+</footer>
+
+
+<script>
+function analyserMatch() {
+  const cote1 = parseFloat(document.getElementById('cote1').value);
+  const cote2 = parseFloat(document.getElementById('cote2').value);
+  
+  const plus55_1 = document.getElementById('plus55_1').value;
+  const plus15_1 = document.getElementById('plus15_1').value;
+  const plus55_2 = document.getElementById('plus55_2').value;
+  const plus15_2 = document.getElementById('plus15_2').value;
+  
+  const class1 = parseInt(document.getElementById('class1').value);
+  const class2 = parseInt(document.getElementById('class2').value);
+
+  let risque = [];
+  let securise = [];
+
+  function addRisque(texte, score) {
+    risque.push({ texte: "🔥 " + texte, score });
+  }
+
+  function addSecurise(texte, score) {
+    securise.push({ texte: "🛡 " + texte, score });
+  }
+
+  if (plus55_1 === 'oui' || plus55_2 === 'oui') {
+    addRisque("Match potentiellement offensif (plus de 5,5 buts)", 80);
+  } else {
+    addSecurise("Match potentiellement fermé (moins de 5,5 buts)", 20);
+    addSecurise("La période au score le plus élevé devrait rester sous 3,5 buts", 60);
+  }
+
+  if (Math.abs(class1 - class2) > 4) {
+    addRisque("Grosse différence de niveau, attention aux surprises", 70);
+    addRisque("Possibilité de but en infériorité ou cage vide", 60);
+  } else {
+    addSecurise("Niveau des équipes équilibré", 40);
+  }
+
+  if (cote1 > 2.5 || cote2 > 2.5) {
+    addSecurise("Un favori clair pourrait s'imposer (cote > 2.5)", 85);
+  } else {
+    addRisque("Aucun favori net sur ce match", 15);
+  }
+
+  if (plus15_1 === 'oui' || plus15_2 === 'oui') {
+    addRisque("Départ de match très actif (plus de 1,5 buts en 1ère période)", 75);
+    addRisque("Possibilité de but du défenseur en début de match", 65);
+    addRisque("Risque de but en cage vide en fin de match", 70);
+    addRisque("Premier but possible en situation spéciale (4x4 ou 3x3)", 60);
+  } else {
+    addSecurise("Début de match probablement calme", 25);
+    addSecurise("Premier but probable en situation classique (5x5)", 40);
+  }
+
+  risque.sort((a, b) => b.score - a.score);
+  securise.sort((a, b) => b.score - a.score);
+
+  document.getElementById('risque').innerHTML = '<ul>' + 
+    risque.map(r => <li>${r.texte}</li>).join('') + '</ul>';
+
+  document.getElementById('securise').innerHTML = '<ul>' + 
+    securise.map(s => <li>${s.texte}</li>).join('') + '</ul>';
+
+  document.getElementById('results').style.display = 'block';
+}
+
+function resetForm() {
+  document.querySelectorAll('input, select').forEach(el => el.value = '');
+  document.getElementById('results').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
